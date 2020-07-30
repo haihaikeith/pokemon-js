@@ -1,4 +1,19 @@
-alert('I WON\'T FAIL THIS');
+var pokemonList = [
+    {
+        name: 'Bulbasaur',
+        height: 0.7,
+        type: ['Grass', 'Poison']
+    },
 
-var favoriteFood = 'Lobster Roll';
-document.write(favoriteFood);
+    {
+        name: 'Charmander',
+        height: 0.6,
+        type: 'Fire'
+    },
+
+    {
+        name: 'Squirtle',
+        height: 0.6,
+        type: 'Water'
+    },
+];
