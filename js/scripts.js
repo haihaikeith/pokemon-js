@@ -16,6 +16,21 @@ var pokemonList = [
         height: 0.5,
         type: 'Water'
     },
+    {
+        name: 'Ivysaur',
+        height: 3.03,
+        type: ['Grass', 'Poison']
+    },
+    {
+        name: 'Charmeleon',
+        height: 3.07,
+        type: 'Fire'
+    },
+    {
+        name: 'Wartotle',
+        height: 3.03,
+        type: 'Water'
+    },
 ];
 
 
@@ -26,7 +41,11 @@ document.write('<h1> Some Pokemon stats!</h1>');
   
   if (currentItem.height <= 0.5) {
     document.write(' (Wow that\'s real small!)' )
-    }
+    };
+
+  if (currentItem.height >= 3.04){
+      document.write(' (You play basketball?)')
+  }
 });
 
 
