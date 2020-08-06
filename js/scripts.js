@@ -38,14 +38,15 @@ var pokemonRepository = (function () {
     }
 
     function add(pokemon) {
-        pokemonList.push(pokemon)
+        pokemonList.push(pokemon);
     }
     
 
     return {
         add: add,
         getAll: getAll
-     };
+        }
+     
     })();
 
 document.write('<h1> Some Pokemon stats!</h1>');
