@@ -37,7 +37,7 @@ var pokemonRepository = (function () {
 
     function getAll() {
         return pokemonList;
-    };
+    }
 
     function add(pokemon) {
         pokemonList.push(pokemon);
@@ -51,7 +51,7 @@ var pokemonRepository = (function () {
      
     })();
 
-    document.write(pokemonRepository.getAll)();
+    document.write(pokemonRepository.getAll());
     
 
 document.write('<h1> Some Pokemon stats!</h1>');
