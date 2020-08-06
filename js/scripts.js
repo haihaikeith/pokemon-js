@@ -51,19 +51,16 @@ var pokemonRepository = (function () {
      
     })();
 
-    document.write(pokemonRepository.getAll());
-    
-
 document.write('<h1> Some Pokemon stats!</h1>');
 
-  pokemonList.forEach(function(currentItem){
-  document.write('<p>' + currentItem.name + ' is ' + currentItem.height + ' meters tall!');
+  pokemonRepository.getAll().forEach(function (pokemon) {
+  document.write('<p>' + pokemon.name + ' is ' + pokemon.height + ' meters tall!');
   
-  if (currentItem.height <= 0.5) {
+  if (pokemon.height <= 0.5) {
     document.write(' (Wow that\'s real small!)' )
     };
 
-  if (currentItem.height >= 3.04){
+  if (pokemon.height >= 3.04){
       document.write(' (You play basketball?)')
   }
 });
