@@ -1,4 +1,5 @@
-var pokemonList = [
+var pokemonRepository = (function () {
+    var pokemonList = [
     {
         name: 'Bulbasaur',
         height: 0.7,
@@ -32,7 +33,20 @@ var pokemonList = [
         type: 'Water'
     },
 ];
+    function getAll() {
+        return pokemonList;
+    }
 
+    function add(pokemon) {
+        pokemonList.push(pokemon)
+    }
+    
+
+    return {
+        add: add,
+        getAll: getAll
+     };
+    })();
 
 document.write('<h1> Some Pokemon stats!</h1>');
 
