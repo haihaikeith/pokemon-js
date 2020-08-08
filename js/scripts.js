@@ -1,4 +1,4 @@
-var pokemonRepository = (function () {
+var pokemonRepository = (function () {      // IIFE
     var pokemonList = [
     {
         name: 'Bulbasaur',
@@ -28,19 +28,19 @@ var pokemonRepository = (function () {
         type: 'Fire'
     },
     {
-        name: 'Wartotle',
+        name: 'Wartortle',
         height: 3.03,
         type: 'Water'
     },
 ];
 
-
+// function to pull all pokemeon
     function getAll() {
-        return pokemonList;
+        return pokemonRepository;
     }
-
+// function to add pokemon
     function add(pokemon) {
-        pokemonList.push(pokemon);
+        pokemonRepository.push(pokemon);
     }
     
 
@@ -48,21 +48,32 @@ var pokemonRepository = (function () {
         getAll: getAll,
         add: add
         };
-     
+
+// function to add list for each pokemon
+    function addListItem(pokemon) {
+        const ul = document.querySelector('ul.pokemon-list');
+        const listItem = document.createElement('li'); 
+        const button = document.createElement('button'); 
+        addListItem.innerText = pokemon.name; 
+        button.classList.add('pokemon-name'); 
+        listItem.appendChild(button); 
+        ul.appendChild(listItem);
+        return addListItem;
+    }
+ 
+   
     })();
 
-document.write('<h1> Some Pokemon stats!</h1>');
-
-pokemonRepository.getAll().forEach(function (pokemon) {
-    var ul = document.querySelector(ul),
-    var listItem = document.createElement('li'),
-    var button = document.createElement('button')
-        button.innerText = pokemon.name,
-        button.classList.add('pokemon-name'),
-        listItem.appendChild(button),
-        ul.appendChild(listItem);
-  }
-});
 
 
 
+pokemonRepository.getAll().forEach((pokemon) => { 
+    const ul = document.querySelector('ul.pokemon-list');
+    const listItem = document.createElement('li'); 
+    const button = document.createElement('button'); 
+    button.innerText = pokemon.name; 
+    button.classList.add('pokemon-name'); 
+    listItem.appendChild(button); 
+    ul.appendChild(listItem); 
+    addListItem(pokemon);
+}); 
