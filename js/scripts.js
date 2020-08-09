@@ -45,15 +45,24 @@ var pokemonRepository = (function () {      // IIFE
     
 // function to add list for each pokemon
 
-    function addListItem(pokemon) {
-        const ul = document.querySelector('ul.pokemon-list');
-        const listItem = document.createElement('li');
-        const button = document.createElement('button');
-        button.innerText = pokemon.name;
-        button.classList.add('pokemon-name');
-        listItem.appendChild(button);
-    }
 
+function getAll() {
+    return pokemonList;
+}
+
+function add(pokemon) {
+    pokemonList.push(pokemon);
+}
+
+function addListItem(pokemon) {
+    var ul = document.querySelector('ul.pokemon-list');
+    var listItem = document.createElement('li');
+    var button = document.createElement('button');
+    pokemon.innerText = pokemon.name;
+    button.classList.add('pokemon-name');
+    listItem.appendChild(button);
+    ul.appendChild(listItem);
+}
 
 return {
     getAll: getAll,
