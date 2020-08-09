@@ -43,37 +43,26 @@ var pokemonRepository = (function () {      // IIFE
         pokemonRepository.push(pokemon);
     }
     
-
-    return {
-        getAll: getAll,
-        add: add
-        };
-
 // function to add list for each pokemon
+
     function addListItem(pokemon) {
         const ul = document.querySelector('ul.pokemon-list');
-        const listItem = document.createElement('li'); 
-        const button = document.createElement('button'); 
-        addListItem.innerText = pokemon.name; 
-        button.classList.add('pokemon-name'); 
-        listItem.appendChild(button); 
-        ul.appendChild(listItem);
-        return addListItem;
+        const listItem = document.createElement('li');
+        const button = document.createElement('button');
+        button.innerText = pokemon.name;
+        button.classList.add('pokemon-name');
+        listItem.appendChild(button);
     }
+
+
+return {
+    getAll: getAll,
+    add: add,
+    addListItem: addListItem
+    };
  
-   
-    })();
+})();
 
-
-
-
-pokemonRepository.getAll().forEach((pokemon) => { 
-    const ul = document.querySelector('ul.pokemon-list');
-    const listItem = document.createElement('li'); 
-    const button = document.createElement('button'); 
-    button.innerText = pokemon.name; 
-    button.classList.add('pokemon-name'); 
-    listItem.appendChild(button); 
-    ul.appendChild(listItem); 
-    addListItem(pokemon);
-}); 
+pokemonRepository.getAll().forEach((pokemon) => {
+    pokemonRepository.addListItem(pokemon);
+});
