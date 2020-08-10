@@ -3,7 +3,7 @@ var pokemonRepository = (function () {      // IIFE
     {
         name: 'Bulbasaur',
         height: 0.7,
-        type: ['Grass', 'Poison']
+        type: ['Grass ' , ' Poison']
     },
 
     {
@@ -20,7 +20,7 @@ var pokemonRepository = (function () {      // IIFE
     {
         name: 'Ivysaur',
         height: 3.03,
-        type: ['Grass', 'Poison']
+        type: ['Grass ' , ' Poison']
     },
     {
         name: 'Charmeleon',
@@ -60,18 +60,27 @@ function addListItem(pokemon) {
     var button = document.createElement('button');
     pokemon.innerText = pokemon.name;
     button.classList.add('pokemon-name');
+    button.addEventListener('click', function () {
+        showDetails(pokemon)
+    });
     listItem.appendChild(button);
     ul.appendChild(listItem);
+}
+
+function showDetails(pokemon) {
+    console.log(pokemon.name + ' ' + pokemon.height + ' ' + pokemon.type);
+    alert(pokemon.name + ', ' + pokemon.height + 'm, ' + pokemon.type);
 }
 
 return {
     getAll: getAll,
     add: add,
-    addListItem: addListItem
+    addListItem: addListItem,
+    showDetails: showDetails
     };
  
 })();
 
-pokemonRepository.getAll().forEach((pokemon) => {
+pokemonRepository.getAll().forEach( (pokemon) => {
     pokemonRepository.addListItem(pokemon);
 });

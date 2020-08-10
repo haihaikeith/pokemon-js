@@ -3,10 +3,10 @@
     font-family: 'Rajdhani', sans-serif;
     src: url("https://fonts.googleapis.com/css2?family=Rajdhani&display=swap");
     color: black;
-    background-image: url(img/creature.jpg);
-    background-position: center;
+    background-image: url(../img/pokeball.gif);
+    background-position: center bottom;
     background-repeat: no-repeat;
-    background-size: auto;
+    background-size: 10%;
     line-height: normal;
   }
   
@@ -43,11 +43,13 @@
 
 
 
-.pokemon-list ul {
+button {
     text-align: left;
     list-style-type: none;
-    padding: 5px;
-    width: auto;
+    margin: 5px;
+    width: 150px;
+    height: 30px;
+    color: #000;
 }
 
 /* header stuff */
