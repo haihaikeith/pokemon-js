@@ -3,7 +3,7 @@ var pokemonRepository = (function () {      // IIFE
     {
         name: 'Bulbasaur',
         height: 0.7,
-        type: ['Grass ' , ' Poison']
+        type: ['Grass', ' Poison']
     },
 
     {
@@ -20,7 +20,7 @@ var pokemonRepository = (function () {      // IIFE
     {
         name: 'Ivysaur',
         height: 3.03,
-        type: ['Grass ' , ' Poison']
+        type: ['Grass', ' Poison']
     },
     {
         name: 'Charmeleon',
