@@ -44,12 +44,18 @@
 
 
 button {
-    text-align: left;
-    list-style-type: none;
-    margin: 5px;
-    width: 150px;
-    height: 30px;
-    color: #000;
+  border: none;
+  display: block;
+  width: 100px;
+  height: 50px;
+  font-family: inherit;
+  background-color: #357b70;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  margin: 5px;
+  border-radius: 3px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
 }
 
 /* header stuff */
