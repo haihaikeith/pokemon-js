@@ -35,6 +35,12 @@
     font-style: italic;
   }
   
+  .profile {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
 /* list and button styles */
 
   ul {
