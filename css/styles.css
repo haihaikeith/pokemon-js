@@ -140,3 +140,15 @@ button {
     opacity: 1;
     width: 100%;
   }
+
+  /* modal stuff */
+
+  #modal-container {
+    display: none;
+  }
+  
+  /* CSS for modal container */
+  #modal-container.is-visible {
+    
+    display: block;
+  }
