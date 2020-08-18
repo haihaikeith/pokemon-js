@@ -140,3 +140,13 @@ button {
     opacity: 1;
     width: 100%;
   }
+
+  /* this is code for modal stuff */
+
+  #modal-container {
+    display: none;
+  }
+
+  #modal-container.is-visible {
+    display: block;
+  }
