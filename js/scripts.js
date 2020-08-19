@@ -1,7 +1,7 @@
 var pokemonRepository = (function () {
   var pokemonList = [];
   var apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
-
+  var modalContainer = document.querySelector('#modal-container');
 
 // function to pull all pokemeon
   function getAll() {
@@ -10,6 +10,21 @@ var pokemonRepository = (function () {
 // function to add pokemon
   function add(pokemon) {
       pokemonList.push(pokemon);
+}
+
+
+// adds pokemon to array
+function addListItem(pokemon) {
+  var buttonList = document.querySelector('.pokemon-list');
+  var listItem = document.createElement('li');
+  var button = document.createElement('button');
+    button.innerText = pokemon.name;
+    button.addEventListener('click', function () {
+        showDetails(pokemon)
+    });
+button.classList.add('pokemon-name');
+listItem.appendChild(button);
+buttonList.appendChild(listItem);
 }
 
 // Other functions remain here
@@ -30,94 +45,88 @@ var pokemonRepository = (function () {
     })
   }
 
-// adds pokemon to array
-  function addListItem(pokemon) {
-    var buttonList = document.querySelector('.pokemon-list');
-    var listItem = document.createElement('li');
-    var button = document.createElement('button');
-      button.innerText = pokemon.name;
-      button.addEventListener('click', function () {
-          showDetails(pokemon)
-      });
-  button.classList.add('pokemon-name');
-  listItem.appendChild(button);
-  buttonList.appendChild(listItem);
+// loads pokemon details
+function loadDetails(item) {
+  var url = item.detailsUrl;
+    return fetch(url).then(function (response) {
+      return response.json();
+}).then(function (details) {
+// add the details to the item
+  item.imageUrl = details.sprites.front_default;
+  item.height = details.height;
+  item.type = details.type;
+}).catch(function (e) {
+  console.error(e);
+});
+}  
+
+// return pokemon array
+function catchAll() { 
+  return repository;
   }
 
-// function to show pokemon details
-  function showDetails(pokemon) {
-    loadDetails(pokemon).then(function () {
-      console.log(pokemon);
-  });
-}
 
 // function to show modal
-function showModal() {
-  var modalContainer = document.querySelector('#modal-container');
+
+
+  function showModal(title, text) {
+    // Clear all existing modal content
+    modalContainer.innerHTML = '';
+    
+    var modal = document.createElement('div');
+    modal.classList.add('modal');
+    
+    // Add the new modal content
+    var closeButtonElement = document.createElement('button');
+    closeButtonElement.classList.add('modal-close');
+    closeButtonElement.innerText = 'Close';
+    closeButtonElement.addEventListener('click', hideModal);
+    
+    var titleElement = document.createElement('h1');
+    titleElement.innerText = title;
+    
+    var contentElement = document.createElement('p');
+    contentElement.innerText = text;
+    
+    modal.appendChild(closeButtonElement);
+    modal.appendChild(titleElement);
+    modal.appendChild(contentElement);
+    modalContainer.appendChild(modal);
+    
     modalContainer.classList.add('is-visible');
+  }
 
-// clear all existing modal content
-  modalContainer.innerHTML = '';
 
-  var modal = document.createElement('div');
-  modal.classList.add('modal');
 
-// add new modal content
-  var closeButton = document.createElement('button');
-  closeButton.classList.add('modal-close');
-  closeButton.innerText = 'Get out of here';
-
-  var titleElement = document.createElement('p');
-  titleElement.innerText = title;
-
-  var buttonContent = document.createElement('p');
-  buttonContent.innerText = text;
-
-  modal.appendChild(closeButton);
-  modal.appendChild(titleElement);
-  modal.appendChild(buttonContent);
-  modalContainer.appendChild(modal);
-  modalContainer.classList.add('is-visible');
-
-// to show the close button
-  var closeButton = document.createElement('button');
-  closeButton.classList.add('modal-close');
-  closeButton.innerText = 'Get out of here';
-  closeButton.addEventListener('click', hideModal);
-}
-
-    document.querySelector('#show-modal').addEventListener('click', () =>{
-      showModal('Modal title', 'this should be some content');
-
+// function to show pokemon details
+function showDetails(pokemon) {
+  pokemonRepository.loadDetails(pokemon).then(function () {
+    showModal(pokemon.name, pokemon.height, pokemon.imageUrl, pokemon.type);
 });
-
-// hides modal
-function hideModal() {
-  var modalContainer = document.querySelector('#modal-container');
-  modalContainer.classList.remove('is-visible')
 }
 
-// loads pokemon details
-  function loadDetails(item) {
-    var url = item.detailsUrl;
-      return fetch(url).then(function (response) {
-        return response.json();
-  }).then(function (details) {
-// add the details to the item
-    item.imageUrl = details.sprites.front_default;
-    item.height = details.height;
-    item.types = details.types;
-  }).catch(function (e) {
-    console.error(e);
-  });
-}  
 // ESC to close out modal
 window.addEventListener('keydown', (e) => {
   var modalContainer = document.querySelector('#modal-container');
-  if (e.key === 'Escape' && modalContainer.classList.contains('if-visible')) {
+  if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
     hideModal();
   }
 });
+
+function hideModal() {
+  var modalContainer = document.querySelector('#modal-container');
+  modalContainer.classList.remove('is-visible');
+  }
+
+// escape to close modal
+  window.addEventListener('keydown', (e) => {
+    var $modalContainer = document.querySelector('#modal-container');
+    if (e.key === 'Escape' && $modalContainer.classList.contains('is-visible'))
+  {
+    hideModal();
+  }
+  });
+
 // eventListener for clicking outside the modal
 modalContainer.addEventListener('click', (e) => {
   var target = e.target;
@@ -136,6 +145,13 @@ modalContainer.addEventListener('click', (e) => {
     showModal: showModal,
     hideModal: hideModal
   };
+
+  // hides modal
+function hideModal() {
+  var modalContainer = document.querySelector('#modal-container');
+  modalContainer.classList.remove('is-visible');
+  }
+
 })();
 
 
