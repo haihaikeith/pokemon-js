@@ -60,10 +60,6 @@ function loadDetails(item) {
 });
 }  
 
-// return pokemon array
-function catchAll() { 
-  return repository;
-  }
 
 
 // function to show modal
@@ -87,10 +83,18 @@ function catchAll() {
     
     var contentElement = document.createElement('p');
     contentElement.innerText = text;
-    
+
+    var pokemonHeight = document.createElement('p');
+    pokemonHeight.innerText = "Height: " + pokemon.height + "m";
+
+    var pokemonType = document.createElement('p');
+    pokemonType.innerText = "Type: " + pokemon.type;
+
     modal.appendChild(closeButtonElement);
     modal.appendChild(titleElement);
     modal.appendChild(contentElement);
+    modal.appendChild(pokemonHeight);
+    modal.appendChild(pokemonType);
     modalContainer.appendChild(modal);
     
     modalContainer.classList.add('is-visible');
@@ -101,7 +105,7 @@ function catchAll() {
 // function to show pokemon details
 function showDetails(pokemon) {
   pokemonRepository.loadDetails(pokemon).then(function () {
-    showModal(pokemon.name, pokemon.height, pokemon.imageUrl, pokemon.type);
+    showModal();
 });
 }
 
