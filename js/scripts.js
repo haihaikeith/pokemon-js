@@ -65,7 +65,7 @@ function loadDetails(item) {
 // function to show pokemon details
 function showDetails(pokemon) {
   pokemonRepository.loadDetails(pokemon).then(function () {
-    modalPopUp.showModal(pokemon.name, pokemon.imageUrl, pokemon.height, pokemon.type);
+    showModal(pokemon.name, pokemon.imageUrl, pokemon.height);
 });
 }
 
@@ -81,7 +81,6 @@ function showDetails(pokemon) {
 
 })();
 
-var modalPopUp = (function() {
   var $modalContainer = document.querySelector('#modal-container');
 
   function showModal(title, img, text) {
@@ -138,10 +137,6 @@ var modalPopUp = (function() {
     }
   });
 
-  return {
-    showModal: showModal
-  };
-})();
 
 
 
