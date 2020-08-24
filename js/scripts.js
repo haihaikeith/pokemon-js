@@ -90,7 +90,7 @@ function showDetails(pokemon) {
 
   function showModal(item) {
     // clear existing modal content
-    $modalContainer.HTML('', class='is-visible');
+    $modalContainer.HTML('', class="is-visible");
 
     var $modal = $('<div class="modal"</div>');
       
