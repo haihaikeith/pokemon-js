@@ -1,5 +1,5 @@
 var pokemonRepository = (function () {
-  var pokemonList = [];
+  var $pokemonList = $('.pokemon-list');
   var apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
 
@@ -15,24 +15,28 @@ var pokemonRepository = (function () {
 
 // adds pokemon to array
 function addListItem(pokemon) {
-  var buttonList = document.querySelector('.pokemon-list');
-  var listItem = document.createElement('li');
-  var button = document.createElement('button');
-    button.innerText = pokemon.name;
-    button.addEventListener('click', function () {
-        showDetails(pokemon)
-    });
-button.classList.add('pokemon-name');
-listItem.appendChild(button);
-buttonList.appendChild(listItem);
+  var $buttonList = $('.pokemon-list');
+
+  var $listItem = $('li');
+  
+  var $button = $('<button class="button-list">' + pokemon.name + '</button>');
+  
+  $button.on('click', function() {
+    showDetails(pokemon);
+  });
+  
+  $button.addClass('pokemon-name');  
+  $listItem.append($button);
+  $buttonList.append($listItem);
 }
 
 // Other functions remain here
 
   function loadList() {
-    return fetch(apiUrl).then(function (response) {
-      return response.json();
-    }).then(function (json) {
+    return $.ajax(apiUrl, {
+        dataType: 'json'
+    })
+    .then(function (json) {
       json.results.forEach(function (item) {
         var pokemon = {
           name: item.name,
@@ -48,9 +52,10 @@ buttonList.appendChild(listItem);
 // loads pokemon details
 function loadDetails(item) {
   var url = item.detailsUrl;
-    return fetch(url).then(function (response) {
-      return response.json();
-}).then(function (details) {
+    return $.ajax(url, {
+        dataType: 'json'
+    })
+    .then(function (details) {
 // add the details to the item
   item.imageUrl = details.sprites.front_default;
   item.height = details.height;
@@ -81,53 +86,43 @@ function showDetails(pokemon) {
 
 })();
 
-  var $modalContainer = document.querySelector('#modal-container');
+  var $modalContainer = $('#modal-container');
 
-  function showModal(title, img, text) {
+  function showModal(item) {
     // clear existing modal content
-    $modalContainer.innerHTML = '';
+    $modalContainer.HTML('', class='is-visible');
 
-    var modal = document.createElement('div');
-    modal.classList.add('modal');
-
+    var $modal = $('<div class="modal"</div>');
+      
     // add modal content
-    var closeButtonElement = document.createElement('button');
-    closeButtonElement.classList.add('modal-close');
-    closeButtonElement.innerText = 'Close';
-    // hide the modal when 'Close' button is clicked
-    closeButtonElement.addEventListener('click', hideModal);
+    var $closeButtonElement = $('<button class="modal-close"</button>');
+    $closeButtonElement.on('click', function(hideModal);
 
-    var titleElement = document.createElement('h2');
-    titleElement.innerText = title;
+    var $titleElement = $('h2');
+    $titleElement.html(item.name, class="modal-title");
 
-    var contentElement = document.createElement('p');
-    contentElement.innerText = text;
+    var $contentElement = $('p');
+    $contentElement.html('Type: ' + item.types, class="modal");
 
-    var pokemonImage = document.createElement('img');
-    pokemonImage.src = img;
-    pokemonImage.classList.add('pokemon-image');
+    var $pokemonImage = $('img');
+    $pokemonImage.html(item.imageUrl, class="pokemon-image");
 
-    modal.appendChild(closeButtonElement);
-    modal.appendChild(titleElement)
-    modal.appendChild(pokemonImage);
-    modal.appendChild(contentElement);
-    $modalContainer.appendChild(modal);
+    $modal.append(closeButtonElement);
+    $modal.append(titleElement)
+    $modal.append(pokemonImage);
+    $modal.append(contentElement);
+    $modalContainer.append(modal);
+    $modalContainer.addClass('is-visible');
 
-    $modalContainer.classList.add('is-visible');
   }
 
   function hideModal() {
-    var $modalContainer = document.querySelector('#modal-container');
-    $modalContainer.classList.remove('is-visible');
+    var $modalContainer = $('#modal-container', 
+    $modalContainer.removeClass('is-visible'));
   }
 
-  window.addEventListener('keydown', e => {
-    if (
-      e.key === 'Escape' &&
-      $modalContainer.classList.contains('is-visible')
-    ) {
-      hideModal();
-    }
+  var $modalContainer.on('click', function(showModal) => {
+    ('modal title', 'this is content');
   });
 
   $modalContainer.addEventListener('click', e => {
