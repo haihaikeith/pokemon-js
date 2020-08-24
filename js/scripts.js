@@ -123,9 +123,9 @@ function showDetails(pokemon) {
 
   var $modalContainer.on('click', function(showModal) => {
     ('modal title', 'this is content');
-  });
+  };
 
-  $modalContainer.addEventListener('click', e => {
+  $modalContainer.on('click', function(hideModal) {
     var target = e.target;
     if (target === $modalContainer) {
       hideModal();
