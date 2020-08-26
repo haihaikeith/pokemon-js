@@ -16,15 +16,11 @@ var pokemonRepository = (function () {
 // adds pokemon to array
 function addListItem(pokemon) {
   var $buttonList = $('.pokemon-list');
-
   var $listItem = $('li');
-  
   var $button = $('<button class="button-list">' + pokemon.name + '</button>');
-  
   $button.on('click', function() {
     showDetails(pokemon);
   });
-  
   $button.addClass('pokemon-name');  
   $listItem.append($button);
   $buttonList.append($listItem);
@@ -90,13 +86,13 @@ function showDetails(pokemon) {
 
   function showModal(item) {
     // clear existing modal content
-    $modalContainer.HTML('', class="is-visible");
+    $modalContainer.addClass('', class="is-visible");
 
     var $modal = $('<div class="modal"</div>');
       
     // add modal content
     var $closeButtonElement = $('<button class="modal-close"</button>');
-    $closeButtonElement.on('click', function(hideModal);
+    $closeButtonElement.on('click', hideModal);
 
     var $titleElement = $('h2');
     $titleElement.html(item.name, class="modal-title");
@@ -117,12 +113,12 @@ function showDetails(pokemon) {
   }
 
   function hideModal() {
-    var $modalContainer = $('#modal-container', 
-    $modalContainer.removeClass('is-visible'));
+    var $modalContainer = $('#modal-container');
+    $modalContainer.removeClass('is-visible');
   }
 
-  var $modalContainer.on('click', function(showModal) => {
-    ('modal title', 'this is content');
+    $modalContainer.on('click', showModal) => {
+      ('modal title', 'this is content');
   };
 
   $modalContainer.on('click', function(hideModal) {
