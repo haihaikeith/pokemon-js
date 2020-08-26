@@ -29,11 +29,9 @@ function addListItem(pokemon) {
 // Other functions remain here
 
   function loadList() {
-    return $.ajax(apiUrl, {
-        dataType: 'json'
-    })
-    .then(function (json) {
-      json.results.forEach(function (item) {
+    return $.ajax(apiUrl)
+    .then(function(item) {
+      $.each(item.results, function(item) {
         var pokemon = {
           name: item.name,
           detailsUrl: item.url
@@ -48,17 +46,16 @@ function addListItem(pokemon) {
 // loads pokemon details
 function loadDetails(item) {
   var url = item.detailsUrl;
-    return $.ajax(url, {
-        dataType: 'json'
-    })
-    .then(function (details) {
+    return $.ajax(url)
+            .then(function (details) {
 // add the details to the item
-  item.imageUrl = details.sprites.front_default;
-  item.height = details.height;
-  item.type = details.type;
-}).catch(function (e) {
-  console.error(e);
-});
+              item.imageUrl = details.sprites.front_default;
+              item.height = details.height;
+              item.type = details.type;
+        })
+            .catch(function (e) {
+              console.error(e);
+    });
 }  
 
 
@@ -85,23 +82,24 @@ function showDetails(pokemon) {
   var $modalContainer = $('#modal-container');
 
   function showModal(item) {
-    // clear existing modal content
-    $modalContainer.addClass('', class="is-visible");
+    $modalContainer.addClass('', 'is-visible');
+    
+    $modalContainer.on('click', showModal);
+  };
 
     var $modal = $('<div class="modal"</div>');
-      
     // add modal content
     var $closeButtonElement = $('<button class="modal-close"</button>');
-    $closeButtonElement.on('click', hideModal);
+      $closeButtonElement.on('click', hideModal);
 
     var $titleElement = $('h2');
-    $titleElement.html(item.name, class="modal-title");
+      $titleElement.addClass(item.name, '#modal-title');
 
     var $contentElement = $('p');
-    $contentElement.html('Type: ' + item.types, class="modal");
+      $contentElement.addClass('Type: ' + item.types, '#modal');
 
     var $pokemonImage = $('img');
-    $pokemonImage.html(item.imageUrl, class="pokemon-image");
+      $pokemonImage.html(item.imageUrl, '#pokemon-image');
 
     $modal.append(closeButtonElement);
     $modal.append(titleElement)
@@ -110,18 +108,21 @@ function showDetails(pokemon) {
     $modalContainer.append(modal);
     $modalContainer.addClass('is-visible');
 
-  }
+  
 
   function hideModal() {
-    var $modalContainer = $('#modal-container');
-    $modalContainer.removeClass('is-visible');
+     $modalContainer.removeClass('is-visible');
   }
 
-    $modalContainer.on('click', showModal) => {
-      ('modal title', 'this is content');
-  };
-
-  $modalContainer.on('click', function(hideModal) {
+    
+      
+      $(window).keydown(function(e) {
+		if (e.key === 'Escape' && $modalContainer.hasClass('is-visible')) {
+			hideModal();
+		}
+  });
+  
+      $modalContainer.on('click', function(hideModal) {
     var target = e.target;
     if (target === $modalContainer) {
       hideModal();
