@@ -51,22 +51,17 @@ function loadList() {
 // loads pokemon details
 function loadDetails(item) {
   var url = item.detailsUrl;
-    return $.ajax(url, {
-      dataType: "json"})
-        .then(function (responsJSON) {
-          return responsJSON;
+    return fetch(url).then(function (response) {
+      return response.json();
 }).then(function (details) {
-  console.log(details);
 // add the details to the item
-       item.imageUrl = details.sprites.front_default;
-       item.height = details.height;
-       item.type = details.type;
+  item.imageUrl = details.sprites.front_default;
+  item.height = details.height;
+  item.type = details.type;
 }).catch(function (e) {
   console.error(e);
 });
 }  
-
-
 
 
 
@@ -89,42 +84,40 @@ function showDetails(pokemon) {
 
 })();
 
-  var $modalContainer = $('#modal-container');
+  var $modalContainer = document.querySelector('#modal-container');
 
   function showModal(title, img, text) {
     // clear existing modal content
-    $modalContainer.html ('');
+    $modalContainer.innerHTML = '';
 
     var modal = document.createElement('div');
     modal.classList.add('modal');
 
     // add modal content
-    var closeButtonElement = $('<button></button>');
-    closeButtonElement.addClass('modal-close');
+    var closeButtonElement = document.createElement('button');
+    closeButtonElement.classList.add('modal-close');
     closeButtonElement.innerText = 'Close';
     // hide the modal when 'Close' button is clicked
-    closeButtonElement.on('click', hideModal);
-      console.log('===', closeButtonElement);
-      console.log('===', modal);
+    closeButtonElement.addEventListener('click', hideModal);
 
-  //   var titleElement = document.createElement('h2');
-  //   titleElement.innerText = title;
+    var titleElement = document.createElement('h2');
+    titleElement.innerText = title;
 
-  //   var contentElement = document.createElement('p');
-  //   contentElement.innerText = text;
+    var contentElement = document.createElement('p');
+    contentElement.innerText = text;
 
-  //   var pokemonImage = document.createElement('img');
-  //   pokemonImage.src = img;
-  //   pokemonImage.classList.add('pokemon-image');
+    var pokemonImage = document.createElement('img');
+    pokemonImage.src = img;
+    pokemonImage.classList.add('pokemon-image');
 
-     modal.append(closeButtonElement);
-  //   modal.appendChild(titleElement)
-  //   modal.appendChild(pokemonImage);
-  //   modal.appendChild(contentElement);
-     $modalContainer.append(modal);
+    modal.appendChild(closeButtonElement);
+    modal.appendChild(titleElement)
+    modal.appendChild(pokemonImage);
+    modal.appendChild(contentElement);
+    $modalContainer.appendChild(modal);
 
-     $modalContainer.addClass('is-visible');
-    }
+    $modalContainer.classList.add('is-visible');
+  }
 
   function hideModal() {
     var $modalContainer = document.querySelector('#modal-container');
@@ -140,7 +133,7 @@ function showDetails(pokemon) {
     }
   });
 
-  $modalContainer.on('click', e => {
+  $modalContainer.addEventListener('click', e => {
     var target = e.target;
     if (target === $modalContainer) {
       hideModal();
