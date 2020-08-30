@@ -94,42 +94,32 @@ function showDetails(pokemon) {
   var $modalContainer = $('#modal-container');
 
   function showModal(pokemon) {
-    pokemon.name, pokemon.imageUrl, pokemon.height;
+      pokemon.name, pokemon.imageUrl, pokemon.height;
     
     // clear existing modal content
      $modalContainer.html ('');
 
     var modal = $('<div></div>');
-    modal.addClass('modal');
-    modal.attr('id', pokemon.id);
-  
-
+        modal.addClass('modal');
+        
     // add modal content
     var closeButtonElement = $('<button></button>');
-    closeButtonElement.addClass('modal-close');
-    closeButtonElement.text('Close');
+        closeButtonElement.addClass('modal-close');
+        closeButtonElement.text('Close');
     // hide the modal when 'Close' button is clicked
-    closeButtonElement.on('click', hideModal);
-      console.log('===', closeButtonElement);
-      console.log('===', modal);
-
+        closeButtonElement.on('click', hideModal);
+        
     var titleElement = $('<h2></h2>');
-        titleElement.text(pokemon.name);
+        titleElement.text('#' + pokemon.id + ' ' + pokemon.name);
 
     var contentElement = $('<p></p>');
-        contentElement.text(pokemon.height + ' meters tall');
+        contentElement.text(pokemon.height);
 
     var pokemonImage = $('<img>');
         pokemonImage.attr('src', pokemon.imageUrl);
         pokemonImage.addClass('pokemon-image');
     
-    var pokemonNumber = $('<p></p>');
-        pokemonNumber.text('#' + pokemon.id);
-        console.log(pokemonNumber);
-
-    
-    
-
+   
      modal.append(closeButtonElement);
      modal.append(titleElement)
      modal.append(pokemonImage);
@@ -144,20 +134,20 @@ function showDetails(pokemon) {
     $modalContainer.removeClass('is-visible');
   }
 
-  window.addEventListener('keydown', e => {
-    if (
-      e.key === 'Escape' &&
-      $modalContainer.classList.contains('is-visible')
-    ) {
+
+  
+  $(window).keydown(function(e){
+    if (e.key === 'Escape' && $modalContainer.hasClass('is-visible')) {
       hideModal();
     }
+    
   });
 
-  $modalContainer.on('click', e => {
-    var target = e.target;
-    if (target === $modalContainer) {
-      hideModal();
-    }
+  $($modalContainer).click(function(e) {
+      var target = e.target;
+        if (target !== $modalContainer) {
+          hideModal();
+          }
   });
 
 
