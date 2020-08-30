@@ -38,6 +38,7 @@ function loadList() {
                 var pokemon = {
                     name: item.name,
                     detailsUrl: item.url
+                   
         };
         add(pokemon);
       });
@@ -61,6 +62,7 @@ function loadDetails(item) {
        item.imageUrl = details.sprites.front_default;
        item.height = details.height;
        item.type = details.type;
+       item.id = details.id;
 }).catch(function (e) {
   console.error(e);
 });
@@ -73,7 +75,7 @@ function loadDetails(item) {
 // function to show pokemon details
 function showDetails(pokemon) {
   pokemonRepository.loadDetails(pokemon).then(function () {
-    showModal(pokemon.name, pokemon.imageUrl, pokemon.height);
+    showModal(pokemon);
 });
 }
 
@@ -91,44 +93,55 @@ function showDetails(pokemon) {
 
   var $modalContainer = $('#modal-container');
 
-  function showModal(title, img, text) {
+  function showModal(pokemon) {
+    pokemon.name, pokemon.imageUrl, pokemon.height;
+    
     // clear existing modal content
-    $modalContainer.html ('');
+     $modalContainer.html ('');
 
-    var modal = document.createElement('div');
-    modal.classList.add('modal');
+    var modal = $('<div></div>');
+    modal.addClass('modal');
+    modal.attr('id', pokemon.id);
+  
 
     // add modal content
     var closeButtonElement = $('<button></button>');
     closeButtonElement.addClass('modal-close');
-    closeButtonElement.innerText = 'Close';
+    closeButtonElement.text('Close');
     // hide the modal when 'Close' button is clicked
     closeButtonElement.on('click', hideModal);
       console.log('===', closeButtonElement);
       console.log('===', modal);
 
-  //   var titleElement = document.createElement('h2');
-  //   titleElement.innerText = title;
+    var titleElement = $('<h2></h2>');
+        titleElement.text(pokemon.name);
 
-  //   var contentElement = document.createElement('p');
-  //   contentElement.innerText = text;
+    var contentElement = $('<p></p>');
+        contentElement.text(pokemon.height + ' meters tall');
 
-  //   var pokemonImage = document.createElement('img');
-  //   pokemonImage.src = img;
-  //   pokemonImage.classList.add('pokemon-image');
+    var pokemonImage = $('<img>');
+        pokemonImage.attr('src', pokemon.imageUrl);
+        pokemonImage.addClass('pokemon-image');
+    
+    var pokemonNumber = $('<p></p>');
+        pokemonNumber.text('#' + pokemon.id);
+        console.log(pokemonNumber);
+
+    
+    
 
      modal.append(closeButtonElement);
-  //   modal.appendChild(titleElement)
-  //   modal.appendChild(pokemonImage);
-  //   modal.appendChild(contentElement);
+     modal.append(titleElement)
+     modal.append(pokemonImage);
+     modal.append(contentElement);
      $modalContainer.append(modal);
 
      $modalContainer.addClass('is-visible');
     }
 
   function hideModal() {
-    var $modalContainer = document.querySelector('#modal-container');
-    $modalContainer.classList.remove('is-visible');
+    var $modalContainer = $('#modal-container');
+    $modalContainer.removeClass('is-visible');
   }
 
   window.addEventListener('keydown', e => {
