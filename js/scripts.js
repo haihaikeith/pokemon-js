@@ -12,12 +12,15 @@ var pokemonRepository = (function () {
       pokemonList.push(pokemon);
 }
 
+// capitlize the names
+const capitalize = (str) => str[0].toUpperCase() + str.substr(1);
+
 
 // adds pokemon to array
 function addListItem(pokemon) {
     var $buttonList = $('.pokemon-list');
     var $listItem = $('<li></li>');
-    var $button = $('<button class=".button">' + pokemon.name + '</button>');
+    var $button = $('<button type="button" class="btn btn-primary">' + pokemon.name + '</button>');
       $button.click (function () {
           showDetails(pokemon)
       });
@@ -36,7 +39,7 @@ function loadList() {
         }).then(function (json) {
             json.results.forEach(function (item) {
                 var pokemon = {
-                    name: item.name,
+                    name: capitalize(item.name),
                     detailsUrl: item.url
                    
         };
