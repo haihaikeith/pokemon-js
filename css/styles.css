@@ -50,19 +50,15 @@
 
 
 button {
-  border: none;
+  border: 1px white;
   display: block;
-  width: 100px;
   height: 50px;
-  font-family: inherit;
-  background-color: rgb(71, 70, 70);
-  color: rgb(244, 255, 97);
-  text-decoration: none;
-  text-align: center;
-  margin: 5px;
-  border-radius: 3px;
-  border-bottom: #fff;
+  color: #fff;
+  margin: 2px;
+  
 }
+
+
 
 /* header stuff */
 
