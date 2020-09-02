@@ -1,6 +1,6 @@
 var pokemonRepository = (function () {
   var pokemonList = [];
-  var apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+  var apiUrl = 'https://pokeapi.co/api/v2/pokemon?limit=20&offset=0';
 
 
 // function to pull all pokemeon

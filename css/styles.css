@@ -58,7 +58,10 @@ button {
   
 }
 
-
+.btn-outline-success {
+  color: #92eaa6;
+  border-color: #b5eac1;
+}
 
 /* header stuff */
 
