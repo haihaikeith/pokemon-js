@@ -1,7 +1,7 @@
 var pokemonRepository = (function () {
   var pokemonList = [];
-  var apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=10';
-  var $modalContainer = $('#modal-container');
+  var apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+
 
 // function to pull all pokemeon
   function getAll() {
@@ -20,7 +20,7 @@ const capitalize = (str) => str[0].toUpperCase() + str.substr(1);
 function addListItem(pokemon) {
     var $buttonList = $('.pokemon-list');
     var $listItem = $('<li></li>');
-    var $button = $('<button type="button" class="btn btn-dark row col-2">' + pokemon.name + '</button>');
+    var $button = $('<button type="button" class="btn btn-primary">' + pokemon.name + '</button>');
       $button.click (function () {
           showDetails(pokemon)
       });
@@ -94,9 +94,43 @@ function showDetails(pokemon) {
 
 })();
 
+  var $modalContainer = $('#modal-container');
 
+  function showModal(pokemon) {
+      pokemon.name, pokemon.imageUrl, pokemon.height;
+    
+    // clear existing modal content
+     $modalContainer.html ('');
 
- 
+    var modal = $('<div></div>');
+        modal.addClass('modal');
+        
+    // add modal content
+    var closeButtonElement = $('<button></button>');
+        closeButtonElement.addClass('modal-close');
+        closeButtonElement.text('Close');
+    // hide the modal when 'Close' button is clicked
+        closeButtonElement.on('click', hideModal);
+        
+    var titleElement = $('<h2></h2>');
+        titleElement.text('#' + pokemon.id + ' ' + pokemon.name);
+
+    var contentElement = $('<p></p>');
+        contentElement.text(pokemon.height);
+
+    var pokemonImage = $('<img>');
+        pokemonImage.attr('src', pokemon.imageUrl);
+        pokemonImage.addClass('pokemon-image');
+    
+   
+     modal.append(closeButtonElement);
+     modal.append(titleElement)
+     modal.append(pokemonImage);
+     modal.append(contentElement);
+     $modalContainer.append(modal);
+
+     $modalContainer.addClass('is-visible');
+    }
 
   function hideModal() {
     var $modalContainer = $('#modal-container');
@@ -112,9 +146,9 @@ function showDetails(pokemon) {
     
   });
 
-  $(modal).click(function(e) {
+  $($modalContainer).click(function(e) {
       var target = e.target;
-        if (target !== modal) {
+        if (target !== $modalContainer) {
           hideModal();
           }
   });

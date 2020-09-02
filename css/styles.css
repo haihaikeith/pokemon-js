@@ -62,7 +62,7 @@ button {
 
 /* header stuff */
 
-.page-header {
+/* .page-header {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -94,11 +94,11 @@ button {
   .navigation-list li {
     display: inline-block;
     margin-left: 15px;
-  }
+  } */
   
   /* This is code for the menu animation */
   
-  .container a {
+  /* .container a {
     color: #000;
     text-decoration: none;
     margin: 0 10px;
@@ -135,8 +135,8 @@ button {
   div.borderXwidth a:hover::after {
     opacity: 1;
     width: 100%;
-  }
-
+  }     */
+ 
   /* this is code for modal stuff */
 
 
