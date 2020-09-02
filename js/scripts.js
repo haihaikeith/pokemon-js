@@ -66,10 +66,12 @@ function loadDetails(item) {
        item.height = details.height;
        item.type = details.type;
        item.id = details.id;
+       return details;
 }).catch(function (e) {
   console.error(e);
 });
 }  
+
 
 
 
