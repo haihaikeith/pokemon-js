@@ -20,7 +20,7 @@ const capitalize = (str) => str[0].toUpperCase() + str.substr(1);
 function addListItem(pokemon) {
     var $buttonList = $('.pokemon-list');
     var $listItem = $('<li></li>');
-    var $button = $('<button type="button" class="btn btn-primary">' + pokemon.name + '</button>');
+    var $button = $('<button type="button" class="btn btn-primary btn-md list-button" data-toggle="modal" data-target="#exampleModal">' + pokemon.name + '</button>');
       $button.click (function () {
           showDetails(pokemon)
       });
@@ -99,18 +99,10 @@ function showDetails(pokemon) {
   function showModal(pokemon) {
       pokemon.name, pokemon.imageUrl, pokemon.height;
     
-    // clear existing modal content
-     $modalContainer.html ('');
-
-    var modal = $('<div></div>');
-        modal.addClass('modal');
-        
-    // add modal content
-    var closeButtonElement = $('<button></button>');
-        closeButtonElement.addClass('modal-close');
-        closeButtonElement.text('Close');
-    // hide the modal when 'Close' button is clicked
-        closeButtonElement.on('click', hideModal);
+    var modalBody = $('.modal-body');
+    var modalTitle = $('.modal-title');
+      modalBody.empty();
+      modalTitle.empty();
         
     var titleElement = $('<h2></h2>');
         titleElement.text('#' + pokemon.id + ' ' + pokemon.name);
@@ -123,35 +115,33 @@ function showDetails(pokemon) {
         pokemonImage.addClass('pokemon-image');
     
    
-     modal.append(closeButtonElement);
-     modal.append(titleElement)
-     modal.append(pokemonImage);
-     modal.append(contentElement);
-     $modalContainer.append(modal);
-
-     $modalContainer.addClass('is-visible');
+     
+     modalBody.append(titleElement)
+     modalBody.append(pokemonImage);
+     modalBody.append(contentElement);
+     
     }
 
-  function hideModal() {
-    var $modalContainer = $('#modal-container');
-    $modalContainer.removeClass('is-visible');
-  }
+  // function hideModal() {
+  //   var $modalContainer = $('#modal-container');
+  //   $modalContainer.removeClass('is-visible');
+  // }
 
 
   
-  $(window).keydown(function(e){
-    if (e.key === 'Escape' && $modalContainer.hasClass('is-visible')) {
-      hideModal();
-    }
+  // $(window).keydown(function(e){
+  //   if (e.key === 'Escape' && $modalContainer.hasClass('is-visible')) {
+  //     hideModal();
+  //   }
     
-  });
+  // });
 
-  $($modalContainer).click(function(e) {
-      var target = e.target;
-        if (target !== $modalContainer) {
-          hideModal();
-          }
-  });
+  // $($modalContainer).click(function(e) {
+  //     var target = e.target;
+  //       if (target !== $modalContainer) {
+  //         hideModal();
+  //         }
+  // });
 
 
 
