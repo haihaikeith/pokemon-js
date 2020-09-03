@@ -27,6 +27,7 @@ function addListItem(pokemon) {
       $button.addClass('.pokemon-name');
       $listItem.append($button);
       $buttonList.append($listItem);
+      
   }
 
 // Other functions remain here
@@ -117,10 +118,11 @@ function showDetails(pokemon) {
         pokemonImage.addClass('pokemon-image');
     
    
-     
+    $('#modal-container').modal('show');
      modalBody.append(titleElement)
      modalBody.append(pokemonImage);
      modalBody.append(contentElement);
+     
      
     }
 
