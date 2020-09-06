@@ -126,29 +126,6 @@ function showDetails(pokemon) {
      
     }
 
-  // function hideModal() {
-  //   var $modalContainer = $('#modal-container');
-  //   $modalContainer.removeClass('is-visible');
-  // }
-
-
-  
-  // $(window).keydown(function(e){
-  //   if (e.key === 'Escape' && $modalContainer.hasClass('is-visible')) {
-  //     hideModal();
-  //   }
-    
-  // });
-
-  // $($modalContainer).click(function(e) {
-  //     var target = e.target;
-  //       if (target !== $modalContainer) {
-  //         hideModal();
-  //         }
-  // });
-
-
-
 
 pokemonRepository.loadList().then(function(){
   pokemonRepository.getAll().forEach(function(pokemon) {
