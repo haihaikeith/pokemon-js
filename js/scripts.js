@@ -118,7 +118,7 @@ function showDetails(pokemon) {
         pokemonImage.addClass('pokemon-image');
     
    
-    $('#modal-container').modal('show');
+     $('#modal-container').modal('show');
      modalBody.append(titleElement)
      modalBody.append(pokemonImage);
      modalBody.append(contentElement);
